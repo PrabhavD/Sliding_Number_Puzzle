@@ -5,7 +5,6 @@ function App() {
 
   var Board = React.createClass({
 
-
     getInitialState: function() {
       return {
         tiles: this.shuffle([1, 2, 3, 4, 5, 6, 7, 8, '']),
@@ -71,7 +70,8 @@ function App() {
       this.setState(this.getInitialState());
     },
     render: function() {
-      return <div>
+      return (
+      <div className='App'>
         <div id="game-board">
           {this.state.tiles.map(function(tile, position) {
             return ( <Tile status={tile} key={position} mouseClick={this.mouseClick} />);
@@ -79,27 +79,29 @@ function App() {
         </div>
         <Menu completeClass={this.state.complete ? 'button win' : 'button'} status={this.state.complete ? 'Winner!' : 'Solve'} restart={this.restartGame} />
       </div>
+      );
     }
   });
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  var Tile = React.createClass({
+    clickHandler: function(e) {
+      this.props.tileClick(e.target, this.props.key, this.props.status);
+    },
+    render: function() {
+      return <div className="tile" onClick={this.clickHandler}>{this.props.status}</div>;
+    }
+});
+
+var Menu = React.createClass({
+  clickHandler: function() {
+      this.props.restart();
+  },
+  render: function() {
+      return <div id="menu">
+          <h3 id="subtitle">{this.props.status}</h3>
+          <a className={this.props.winClass} onClick={this.clickHandler}>Restart</a>
+      </div>;
+  }
+});
 
 export default App;
