@@ -4,10 +4,12 @@ import './App.css';
 function App() {
 
   var Board = React.createClass({
-
+    
     getInitialState: function() {
+      let tiles = [1, 2, 3, 4, 5, 6, 7, 8, ''];
+      tiles = tiles.sort(() => Math.random() - 0.5);
       return {
-        tiles: this.shuffle([1, 2, 3, 4, 5, 6, 7, 8, '']),
+        tiles: tiles,
         complete: false
       };
     },
