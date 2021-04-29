@@ -1,4 +1,4 @@
-#9 piece Sliding Number Puzzle
+# 9 piece Sliding Number Puzzle
 
 All files and commits were planned and created within 4 hours.
 
